@@ -1,0 +1,17 @@
+{
+  "name": "odyschat",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["chat", "video", "webrtc", "realtime"],
+  "author": "Odysseus",
+  "license": "ISC",
+  "description": "Um aplicativo de chat em tempo real inspirado no Omegle, com suporte a vídeo e texto usando WebRTC.",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.8.1"
+  }
+}

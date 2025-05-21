@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OdysChat - Conheça pessoas novas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="landing-page">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <span class="logo">OdysChat</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Recursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Termos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="display-4 fw-bold mb-4">Conheça pessoas novas de forma divertida e segura</h1>
+                    <p class="lead mb-4">OdysChat conecta você com pessoas aleatórias de todo o mundo para conversas por texto ou vídeo. Faça novas amizades, pratique idiomas ou apenas converse!</p>
+                    <div class="d-flex gap-3 mt-5">
+                        <button id="start-btn" class="btn btn-primary btn-lg px-4 py-3">
+                            <i class="fas fa-video me-2"></i>Começar agora
+                        </button>
+                        <button class="btn btn-outline-light btn-lg px-4 py-3" data-bs-toggle="modal" data-bs-target="#howItWorksModal">
+                            <i class="fas fa-info-circle me-2"></i>Como funciona
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="hero-image-container">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid rounded-4 shadow-lg" alt="Pessoas conversando online">
+                        <div class="chat-bubble chat-bubble-1">Olá! De onde você é?</div>
+                        <div class="chat-bubble chat-bubble-2">Estou no Brasil! E você?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Recursos Incríveis</h2>
+                <p class="lead text-muted">Descubra tudo o que o OdysChat tem a oferecer</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Chat por Vídeo</h3>
+                        <p>Converse cara a cara com pessoas de todo o mundo usando nossa conexão de vídeo de alta qualidade.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comment-alt"></i>
+                        </div>
+                        <h3>Chat por Texto</h3>
+                        <p>Prefere manter o anonimato? Use nosso chat por texto para conversas rápidas e divertidas.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h3>Compartilhamento de Tela</h3>
+                        <p>Compartilhe sua tela para mostrar fotos, vídeos ou qualquer conteúdo interessante.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-filter"></i>
+                        </div>
+                        <h3>Filtros de Vídeo</h3>
+                        <p>Adicione um toque divertido às suas conversas com nossos filtros de vídeo personalizáveis.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Segurança Garantida</h3>
+                        <p>Suas conversas são privadas e seguras. Não armazenamos nenhum conteúdo das suas interações.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-random"></i>
+                        </div>
+                        <h3>Conexões Aleatórias</h3>
+                        <p>Conheça pessoas novas a cada clique com nosso sistema de pareamento aleatório.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Perguntas Frequentes</h2>
+                <p class="lead text-muted">Tudo o que você precisa saber sobre o OdysChat</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    O OdysChat é gratuito?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Sim, o OdysChat é completamente gratuito para usar. Não há taxas ocultas ou assinaturas necessárias.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Preciso criar uma conta para usar?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Não, você não precisa criar uma conta ou fornecer informações pessoais para usar o OdysChat. Basta acessar o site e começar a conversar.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    As conversas são seguras e privadas?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Sim, todas as conversas no OdysChat são privadas e não são armazenadas em nossos servidores. Utilizamos tecnologia WebRTC para conexões seguras ponto a ponto.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Posso reportar usuários inadequados?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Sim, temos um sistema de denúncias para reportar comportamentos inadequados. Basta clicar no botão "Reportar" durante a conversa.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    O OdysChat funciona em dispositivos móveis?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Sim, o OdysChat é totalmente responsivo e funciona em smartphones, tablets e computadores. Basta acessar pelo navegador do seu dispositivo.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container py-5 text-center">
+            <div data-aos="zoom-in">
+                <h2 class="display-5 fw-bold text-white mb-4">Pronto para conhecer pessoas novas?</h2>
+                <p class="lead text-white mb-5">Milhares de pessoas estão online agora mesmo esperando para conversar com você!</p>
+                <button id="cta-start-btn" class="btn btn-light btn-lg px-5 py-3">
+                    <i class="fas fa-comments me-2"></i>Começar a conversar
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-4">OdysChat</h5>
+                    <p class="text-white-50">Conectando pessoas aleatoriamente para conversas divertidas e significativas desde 2023.</p>
+                    <div class="social-links mt-4">
+                        <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-white-50">Início</a></li>
+                        <li class="mb-2"><a href="#features" class="text-white-50">Recursos</a></li>
+                        <li class="mb-2"><a href="#faq" class="text-white-50">FAQ</a></li>
+                        <li><a href="#" class="text-white-50" data-bs-toggle="modal" data-bs-target="#termsModal">Termos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">Legal</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50" data-bs-toggle="modal" data-bs-target="#termsModal">Termos de Uso</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacidade</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Cookies</a></li>
+                        <li><a href="#" class="text-white-50">LGPD</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="text-white mb-4">Contato</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> contato@odyschat.com</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> (11) 99999-9999</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> São Paulo, Brasil</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="mt-5 mb-4 bg-secondary">
+            
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-white-50 mb-0">&copy; 2025OdysChat. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="text-white-50 mb-0">Feito com <i class="fas fa-heart text-danger"></i> no Brasil</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Terms Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Termos de Uso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>1. Aceitação dos Termos</h4>
+                    <p>Ao acessar ou usar o OdysChat, você concorda em cumprir estes Termos de Uso e todas as leis e regulamentos aplicáveis. Se você não concordar com algum destes termos, está proibido de usar ou acessar este site.</p>
+                    
+                    <h4>2. Uso do Serviço</h4>
+                    <p>O OdysChat permite que você se conecte aleatoriamente com outros usuários para conversas por texto e vídeo. Você concorda em usar o serviço apenas para fins legais e de maneira que não infrinja os direitos de, restrinja ou iniba o uso e aproveitamento do serviço por qualquer terceiro.</p>
+                    
+                    <h4>3. Comportamento Proibido</h4>
+                    <p>Você concorda em não usar o OdysChat para:</p>
+                    <ul>
+                        <li>Publicar, transmitir ou compartilhar material que seja ilegal, prejudicial, ameaçador, abusivo, assediador, difamatório, vulgar, obsceno, invasivo da privacidade de outrem ou que possa expor menores de idade a conteúdo inadequado.</li>
+                        <li>Assediar, intimidar ou ameaçar outros usuários.</li>
+                        <li>Personificar qualquer pessoa ou entidade, ou falsamente declarar ou deturpar sua afiliação com uma pessoa ou entidade.</li>
+                        <li>Transmitir qualquer material que contenha vírus, cavalos de Troia, worms, bombas-relógio, cancelbots, ou qualquer outro código, arquivo ou programa de computador destinado a interromper, destruir ou limitar a funcionalidade de qualquer software ou hardware de computador.</li>
+                        <li>Anunciar ou solicitar qualquer usuário a comprar ou vender produtos ou serviços.</li>
+                        <li>Coletar ou armazenar dados pessoais sobre outros usuários.</li>
+                    </ul>
+                    
+                    <h4>4. Idade Mínima</h4>
+                    <p>Você deve ter pelo menos 18 anos de idade para usar o OdysChat. Ao usar o serviço, você declara e garante que tem 18 anos de idade ou mais.</p>
+                    
+                    <h4>5. Privacidade</h4>
+                    <p>Sua privacidade é importante para nós. Consulte nossa Política de Privacidade para entender como coletamos, usamos e protegemos suas informações.</p>
+                    
+                    <h4>6. Modificações do Serviço</h4>
+                    <p>Reservamo-nos o direito de modificar ou descontinuar, temporária ou permanentemente, o serviço (ou qualquer parte dele) com ou sem aviso prévio. Você concorda que não seremos responsáveis perante você ou qualquer terceiro por qualquer modificação, suspensão ou descontinuação do serviço.</p>
+                    
+                    <h4>7. Rescisão</h4>
+                    <p>Podemos encerrar ou suspender seu acesso ao serviço imediatamente, sem aviso prévio ou responsabilidade, por qualquer motivo, incluindo, sem limitação, se você violar os Termos.</p>
+                    
+                    <h4>8. Limitação de Responsabilidade</h4>
+                    <p>Em nenhum caso o OdysChat, seus diretores, funcionários ou agentes serão responsáveis por quaisquer danos indiretos, incidentais, especiais, consequenciais ou punitivos, incluindo, sem limitação, perda de lucros, dados, uso, boa vontade ou outras perdas intangíveis, resultantes de seu acesso ou uso ou incapacidade de acessar ou usar o serviço.</p>
+                    
+                    <h4>9. Lei Aplicável</h4>
+                    <p>Estes Termos serão regidos e interpretados de acordo com as leis do Brasil, sem consideração aos seus conflitos de princípios legais.</p>
+                    
+                    <h4>10. Alterações nos Termos</h4>
+                    <p>Reservamo-nos o direito, a nosso exclusivo critério, de modificar ou substituir estes Termos a qualquer momento. Se uma revisão for material, tentaremos fornecer um aviso com pelo menos 30 dias de antecedência antes que quaisquer novos termos entrem em vigor.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceitar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Política de Privacidade</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>1. Informações que Coletamos</h4>
+                    <p>O OdysChat foi projetado com sua privacidade em mente. Não exigimos que você crie uma conta ou forneça informações pessoais para usar nosso serviço. No entanto, coletamos automaticamente certas informações quando você usa o OdysChat:</p>
+                    <ul>
+                        <li><strong>Informações de Uso:</strong> Coletamos informações sobre como você usa o serviço, como os recursos que você acessa e o tempo que passa no site.</li>
+                        <li><strong>Informações do Dispositivo:</strong> Coletamos informações sobre o dispositivo que você usa para acessar o OdysChat, incluindo modelo de hardware, sistema operacional, identificadores de dispositivo únicos e informações de rede móvel.</li>
+                        <li><strong>Informações de Log:</strong> Nossos servidores registram automaticamente informações quando você usa o OdysChat, incluindo seu endereço IP, tipo de navegador, páginas visitadas, data e hora do acesso e outros dados de uso.</li>
+                    </ul>
+                    
+                    <h4>2. Como Usamos Suas Informações</h4>
+                    <p>Usamos as informações que coletamos para:</p>
+                    <ul>
+                        <li>Fornecer, manter e melhorar o OdysChat.</li>
+                        <li>Desenvolver novos recursos e funcionalidades.</li>
+                        <li>Entender como os usuários usam o serviço para melhorá-lo.</li>
+                        <li>Detectar, investigar e prevenir atividades fraudulentas e não autorizadas.</li>
+                        <li>Proteger os direitos e a segurança de nossos usuários e terceiros.</li>
+                        <li>Cumprir obrigações legais.</li>
+                    </ul>
+                    
+                    <h4>3. Compartilhamento de Informações</h4>
+                    <p>Não vendemos, alugamos ou compartilhamos suas informações pessoais com terceiros, exceto nas seguintes circunstâncias:</p>
+                    <ul>
+                        <li><strong>Com seu Consentimento:</strong> Podemos compartilhar suas informações quando você nos der consentimento para fazê-lo.</li>
+                        <li><strong>Para Fins Legais:</strong> Podemos compartilhar informações se acreditarmos de boa fé que o acesso, uso, preservação ou divulgação das informações é razoavelmente necessário para cumprir qualquer lei, regulamento, processo legal ou solicitação governamental aplicável.</li>
+                        <li><strong>Para Proteger o OdysChat e Outros:</strong> Podemos compartilhar informações quando acreditarmos de boa fé que é necessário proteger os direitos, propriedade ou segurança do OdysChat, nossos usuários ou o público.</li>
+                    </ul>
+                    
+                    <h4>4. Segurança</h4>
+                    <p>Levamos a segurança de suas informações a sério e implementamos medidas técnicas e organizacionais apropriadas para proteger as informações contra acesso não autorizado, alteração, divulgação ou destruição.</p>
+                    
+                    <h4>5. Seus Direitos</h4>
+                    <p>Dependendo de onde você reside, você pode ter certos direitos em relação às suas informações pessoais, incluindo:</p>
+                    <ul>
+                        <li>O direito de acessar as informações que temos sobre você.</li>
+                        <li>O direito de corrigir informações imprecisas que temos sobre você.</li>
+                        <li>O direito de excluir suas informações.</li>
+                        <li>O direito de restringir ou se opor ao processamento de suas informações.</li>
+                        <li>O direito à portabilidade de dados.</li>
+                    </ul>
+                    
+                    <h4>6. Crianças</h4>
+                    <p>O OdysChat não é destinado a pessoas com menos de 18 anos de idade. Não coletamos intencionalmente informações pessoais de crianças menores de 18 anos. Se tomarmos conhecimento de que coletamos informações pessoais de uma criança menor de 18 anos, tomaremos medidas para excluir essas informações o mais rápido possível.</p>
+                    
+                    <h4>7. Alterações nesta Política</h4>
+                    <p>Podemos atualizar esta Política de Privacidade de tempos em tempos. Notificaremos você sobre quaisquer alterações publicando a nova Política de Privacidade nesta página e atualizando a data "Última atualização" abaixo.</p>
+                    
+                    <h4>8. Contato</h4>
+                    <p>Se você tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco em: contato@odyschat.com</p>
+                    
+                    <p><strong>Última atualização:</strong> 1 de novembro de 2023</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works Modal -->
+    <div class="modal fade" id="howItWorksModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Como Funciona o OdysChat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid rounded shadow" alt="Pessoas conversando online">
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="mb-3">É muito simples!</h4>
+                            <ol class="how-it-works-list">
+                                <li>
+                                    <span class="step-number">1</span>
+                                    <div>
+                                        <h5>Escolha seu modo</h5>
+                                        <p>Selecione entre chat por texto ou vídeo, dependendo da sua preferência.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="step-number">2</span>
+                                    <div>
+                                        <h5>Conecte-se</h5>
+                                        <p>Nosso sistema irá conectar você aleatoriamente com outro usuário online.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="step-number">3</span>
+                                    <div>
+                                        <h5>Converse</h5>
+                                        <p>Inicie uma conversa e conheça pessoas novas de todo o mundo!</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="step-number">4</span>
+                                    <div>
+                                        <h5>Próximo</h5>
+                                        <p>Se quiser conhecer outra pessoa, basta clicar em "Próximo" a qualquer momento.</p>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="modal-start-btn" data-bs-dismiss="modal">Começar agora</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Age Verification Modal -->
+    <div class="modal fade" id="ageVerificationModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Verificação de Idade</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-exclamation-circle text-warning display-1 mb-4"></i>
+                    <h4>Você tem 18 anos ou mais?</h4>
+                    <p class="mb-4">O OdysChat é destinado apenas para adultos. Ao clicar em "Sim", você confirma que tem pelo menos 18 anos de idade.</p>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="termsCheck">
+                        <label class="form-check-label" for="termsCheck">
+                            Li e concordo com os <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Termos de Uso</a> e <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Política de Privacidade</a>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='https://www.google.com'">Não, sair</button>
+                    <button type="button" class="btn btn-primary" id="ageConfirmBtn" disabled>Sim, continuar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    
+<!-- Adicione este script no final do arquivo, antes do fechamento do body -->
+<script>
+    // Função para garantir contraste adequado em elementos dinâmicos
+    function updateLandingPageTheme() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        
+        // Atualizar cores dos acordeões
+        document.querySelectorAll('.accordion-button').forEach(el => {
+            if (isDarkMode) {
+                el.style.backgroundColor = '#1e1e1e';
+                el.style.color = '#f8f9fa';
+            } else {
+                el.style.backgroundColor = '';
+                el.style.color = '';
+            }
+        });
+        
+        // Atualizar cores dos modais
+        document.querySelectorAll('.modal-content').forEach(el => {
+            if (isDarkMode) {
+                el.style.backgroundColor = '#1e1e1e';
+                el.style.color = '#f8f9fa';
+            } else {
+                el.style.backgroundColor = '';
+                el.style.color = '';
+            }
+        });
+    }
+    
+    // Adicionar ao script existente
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar AOS
+        AOS.init();
+        
+        // Verificar preferência de tema do sistema
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark-mode');
+            updateLandingPageTheme();
+        }
+        
+        // Handle start buttons
+        document.getElementById('start-btn').addEventListener('click', showAgeVerification);
+        document.getElementById('cta-start-btn').addEventListener('click', showAgeVerification);
+        document.getElementById('modal-start-btn').addEventListener('click', showAgeVerification);
+        
+        // Handle terms checkbox
+        document.getElementById('termsCheck').addEventListener('change', function() {
+            document.getElementById('ageConfirmBtn').disabled = !this.checked;
+        });
+        
+        // Handle age confirmation
+        document.getElementById('ageConfirmBtn').addEventListener('click', function() {
+            window.location.href = 'chat.html';
+        });
+        
+        function showAgeVerification() {
+            const ageModal = new bootstrap.Modal(document.getElementById('ageVerificationModal'));
+            ageModal.show();
+        }
+    });
+</script>
+</body>
+</html>
+

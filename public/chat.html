@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OdysChat - Conversando</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="chat-page">
+    <div class="container-fluid p-0 d-flex flex-column vh-100">
+        <!-- Header -->
+        <header class="bg-gradient shadow-sm">
+            <div class="container">
+                <div class="row py-3 align-items-center">
+                    <div class="col-6 col-md-4">
+                        <a href="index.html" class="text-decoration-none">
+                            <h1 class="logo m-0">OdysChat</h1>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-8 text-end">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-light me-2">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <button id="settings-btn" class="btn btn-sm btn-outline-light" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow-1 d-flex">
+            <div class="container py-4 h-100">
+                <div class="row h-100">
+                    <!-- Chat Area -->
+                    <div class="col-md-8 mb-4 mb-md-0">
+                        <div class="card h-100 shadow-sm chat-card">
+                            <div class="card-body p-0 d-flex flex-column h-100">
+                                <!-- Video Chat -->
+                                <div id="video-chat" class="hidden h-100">
+                                    <div class="video-container position-relative h-100">
+                                        <video id="remote-video" class="main-video" autoplay playsinline></video>
+                                        <video id="local-video" class="self-video" autoplay playsinline muted></video>
+                                        <div class="video-controls">
+                                            <button id="mute-btn" class="btn btn-control" title="Mutar microfone">
+                                                <i class="fas fa-microphone"></i>
+                                            </button>
+                                            <button id="camera-off-btn" class="btn btn-control" title="Desligar câmera">
+                                                <i class="fas fa-video"></i>
+                                            </button>
+                                            <button id="zoom-in-btn" class="btn btn-control" title="Aumentar zoom">
+                                                <i class="fas fa-search-plus"></i>
+                                            </button>
+                                            <button id="zoom-out-btn" class="btn btn-control" title="Diminuir zoom">
+                                                <i class="fas fa-search-minus"></i>
+                                            </button>
+                                            <button id="fullscreen-btn" class="btn btn-control" title="Tela cheia">
+                                                <i class="fas fa-expand"></i>
+                                            </button>
+                                            <button id="toggle-hud-btn" class="btn btn-control" title="Esconder/Mostrar HUD">
+                                                <i class="fas fa-eye-slash"></i>
+                                            </button>
+                                            <select id="video-filter" class="form-select form-select-sm" title="Aplicar filtro">
+                                                <option value="none">Sem filtro</option>
+                                                <option value="blur(5px)">Blur</option>
+                                                <option value="grayscale(100%)">Cinza</option>
+                                                <option value="sepia(100%)">Sépia</option>
+                                                <option value="brightness(1.5)">Brilho</option>
+                                                <option value="contrast(200%)">Contraste</option>
+                                                <option value="hue-rotate(90deg)">Cor</option>
+                                                <option value="invert(100%)">Invertido</option>
+                                            </select>
+                                        </div>
+                                        <div class="video-status">
+                                            <span id="connection-status">Procurando...</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Text Chat -->
+                                <div id="text-chat" class="h-100 d-flex flex-column">
+                                    <div class="chat-header p-3 border-bottom">
+                                        <div class="d-flex align-items-center">
+                                            <div class="chat-avatar">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h6 class="mb-0">Estranho</h6>
+                                                <small id="chat-status" class="text-success">Online</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="chat-box" class="flex-grow-1 p-3 overflow-auto">
+                                        <div class="text-center py-5">
+                                            <div class="spinner-border text-primary mb-3" role="status">
+                                                <span class="visually-hidden">Carregando...</span>
+                                            </div>
+                                            <p class="welcome-msg">Procurando alguém para conversar...</p>
+                                        </div>
+                                    </div>
+                                    <div class="input-area p-3 border-top">
+                                        <div class="input-group">
+                                            <input type="text" id="message-input" class="form-control" placeholder="Digite sua mensagem..." disabled>
+                                            <button id="emoji-btn" class="btn btn-outline-secondary" disabled>
+                                                <i class="far fa-smile"></i>
+                                            </button>
+                                            <button id="send-btn" class="btn btn-primary" disabled>
+                                                <i class="fas fa-paper-plane"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="col-md-4">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-gradient text-white">
+                                <h5 class="m-0">Controles</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-grid gap-3">
+                                    <div class="btn-group w-100" role="group">
+                                        <button id="video-chat-btn" class="btn btn-outline-primary">
+                                            <i class="fas fa-video me-2"></i>Vídeo
+                                        </button>
+                                        <button id="text-chat-btn" class="btn btn-outline-primary">
+                                            <i class="fas fa-comment me-2"></i>Texto
+                                        </button>
+                                    </div>
+                                    <button id="next-btn" class="btn btn-primary w-100">
+                                        <i class="fas fa-random me-2"></i>Próximo
+                                    </button>
+                                    <button id="share-screen-btn" class="btn btn-outline-secondary w-100">
+                                        <i class="fas fa-desktop me-2"></i>Compartilhar Tela
+                                    </button>
+                                    <button id="snapshot-btn" class="btn btn-outline-info w-100">
+                                        <i class="fas fa-camera me-2"></i>Capturar Imagem
+                                    </button>
+                                    <button id="report-btn" class="btn btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#reportModal">
+                                        <i class="fas fa-flag me-2"></i>Reportar
+                                    </button>
+                                </div>
+                                <hr>
+                                <div class="online-stats">
+                                    <h6 class="mb-3">Estatísticas</h6>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Usuários online:</span>
+                                        <span class="badge bg-success">1,243</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Em vídeo:</span>
+                                        <span class="badge bg-primary">876</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Em texto:</span>
+                                        <span class="badge bg-info">367</span>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="social-share">
+                                    <p class="text-muted mb-2">Compartilhar:</p>
+                                    <div class="d-flex gap-2">
+                                        <button id="share-twitter" class="btn btn-sm btn-outline-info">
+                                            <i class="fab fa-twitter"></i>
+                                        </button>
+                                        <button id="share-facebook" class="btn btn-sm btn-outline-primary">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </button>
+                                        <button id="share-whatsapp" class="btn btn-sm btn-outline-success">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gradient py-3 text-white text-center">
+            <div class="container">
+                <p class="m-0">© 2023 OdysChat. <a href="#" class="text-white text-decoration-underline" data-bs-toggle="modal" data-bs-target="#termsModal">Termos</a> | <a href="#" class="text-white text-decoration-underline" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacidade</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Configurações</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="mb-3">Aparência</h6>
+                    <div class="mb-3">
+                        <label class="form-label">Tema</label>
+                        <select class="form-select" id="theme-select">
+                            <option value="light">Claro</option>
+                            <option value="dark">Escuro</option>
+                            <option value="auto">Automático (sistema)</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <h6 class="mb-3">Câmera e Microfone</h6>
+                    <div class="mb-3">
+                        <label class="form-label">Câmera</label>
+                        <select class="form-select" id="camera-select">
+                            <option value="">Carregando câmeras...</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Microfone</label>
+                        <select class="form-select" id="mic-select">
+                            <option value="">Carregando microfones...</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <h6 class="mb-3">Preferências</h6>
+                    <div class="form-check form-switch mb-2">
+                        <input class="form-check-input" type="checkbox" id="autoplay-sounds">
+                        <label class="form-check-label" for="autoplay-sounds">Sons de notificação</label>
+                    </div>
+                    <div class="form-check form-switch mb-2">
+                        <input class="form-check-input" type="checkbox" id="show-typing">
+                        <label class="form-check-label" for="show-typing">Mostrar quando estão digitando</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="blur-background">
+                        <label class="form-check-label" for="blur-background">Desfocar fundo automaticamente</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Modal -->
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Reportar Usuário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Por favor, selecione o motivo pelo qual você está reportando este usuário:</p>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="reportReason" id="reason1" value="inappropriate">
+                        <label class="form-check-label" for="reason1">
+                            Conteúdo inapropriado
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="reportReason" id="reason2" value="harassment">
+                        <label class="form-check-label" for="reason2">
+                            Assédio ou bullying
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="reportReason" id="reason3" value="spam">
+                        <label class="form-check-label" for="reason3">
+                            Spam ou propaganda
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="reportReason" id="reason4" value="underage">
+                        <label class="form-check-label" for="reason4">
+                            Usuário menor de idade
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="reportReason" id="reason5" value="other">
+                        <label class="form-check-label" for="reason5">
+                            Outro motivo
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reportDetails" class="form-label">Detalhes adicionais (opcional):</label>
+                        <textarea class="form-control" id="reportDetails" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="submit-report">Enviar Denúncia</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Termos de Uso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>1. Aceitação dos Termos</h4>
+                    <p>Ao acessar ou usar o OdysChat, você concorda em cumprir estes Termos de Uso e todas as leis e regulamentos aplicáveis. Se você não concordar com algum destes termos, está proibido de usar ou acessar este site.</p>
+                    <h4>2. Uso do Serviço</h4>
+                    <p>O OdysChat permite que você se conecte aleatoriamente com outros usuários para conversas por texto e vídeo. Você concorda em usar o serviço apenas para fins legais e de maneira que não infrinja os direitos de, restrinja ou iniba o uso e aproveitamento do serviço por qualquer terceiro.</p>
+                    <h4>3. Comportamento Proibido</h4>
+                    <p>Você concorda em não usar o OdysChat para:</p>
+                    <ul>
+                        <li>Publicar, transmitir ou compartilhar material que seja ilegal, prejudicial, ameaçador, abusivo, assediador, difamatório, vulgar, obsceno, invasivo da privacidade de outrem ou que possa expor menores de idade a conteúdo inadequado.</li>
+                        <li>Assediar, intimidar ou ameaçar outros usuários.</li>
+                        <li>Personificar qualquer pessoa ou entidade, ou falsamente declarar ou deturpar sua afiliação com uma pessoa ou entidade.</li>
+                        <li>Transmitir qualquer material que contenha vírus, cavalos de Troia, worms, bombas-relógio, cancelbots, ou qualquer outro código, arquivo ou programa de computador destinado a interromper, destruir ou limitar a funcionalidade de qualquer software ou hardware de computador.</li>
+                        <li>Anunciar ou solicitar qualquer usuário a comprar ou vender produtos ou serviços.</li>
+                        <li>Coletar ou armazenar dados pessoais sobre outros usuários.</li>
+                    </ul>
+                    <h4>4. Idade Mínima</h4>
+                    <p>Você deve ter pelo menos 18 anos de idade para usar o OdysChat. Ao usar o serviço, você declara e garante que tem 18 anos de idade ou mais.</p>
+                    <h4>5. Privacidade</h4>
+                    <p>Sua privacidade é importante para nós. Consulte nossa Política de Privacidade para entender como coletamos, usamos e protegemos suas informações.</p>
+                    <h4>6. Modificações do Serviço</h4>
+                    <p>Reservamo-nos o direito de modificar ou descontinuar, temporária ou permanentemente, o serviço (ou qualquer parte dele) com ou sem aviso prévio. Você concorda que não seremos responsáveis perante você ou qualquer terceiro por qualquer modificação, suspensão ou descontinuação do serviço.</p>
+                    <h4>7. Rescisão</h4>
+                    <p>Podemos encerrar ou suspender seu acesso ao serviço imediatamente, sem aviso prévio ou responsabilidade, por qualquer motivo, incluindo, sem limitação, se você violar os Termos.</p>
+                    <h4>8. Limitação de Responsabilidade</h4>
+                    <p>Em nenhum caso o OdysChat, seus diretores, funcionários ou agentes serão responsáveis por quaisquer danos indiretos, incidentais, especiais, consequenciais ou punitivos, incluindo, sem limitação, perda de lucros, dados, uso, boa vontade ou outras perdas intangíveis, resultantes de seu acesso ou uso ou incapacidade de acessar ou usar o serviço.</p>
+                    <h4>9. Lei Aplicável</h4>
+                    <p>Estes Termos serão regidos e interpretados de acordo com as leis do Brasil, sem consideração aos seus conflitos de princípios legais.</p>
+                    <h4>10. Alterações nos Termos</h4>
+                    <p>Reservamo-nos o direito, a nosso exclusivo critério, de modificar ou substituir estes Termos a qualquer momento. Se uma revisão for material, tentaremos fornecer um aviso com pelo menos 30 dias de antecedência antes que quaisquer novos termos entrem em vigor.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Política de Privacidade</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>1. Informações que Coletamos</h4>
+                    <p>O OdysChat foi projetado com sua privacidade em mente. Não exigimos que você crie uma conta ou forneça informações pessoais para usar nosso serviço. No entanto, coletamos automaticamente certas informações quando você usa o OdysChat:</p>
+                    <ul>
+                        <li><strong>Informações de Uso:</strong> Coletamos informações sobre como você usa o serviço, como os recursos que você acessa e o tempo que passa no site.</li>
+                        <li><strong>Informações do Dispositivo:</strong> Coletamos informações sobre o dispositivo que você usa para acessar o OdysChat, incluindo modelo de hardware, sistema operacional, identificadores de dispositivo únicos e informações de rede móvel.</li>
+                        <li><strong>Informações de Log:</strong> Nossos servidores registram automaticamente informações quando você usa o OdysChat, incluindo seu endereço IP, tipo de navegador, páginas visitadas, data e hora do acesso e outros dados de uso.</li>
+                    </ul>
+                    <h4>2. Como Usamos Suas Informações</h4>
+                    <p>Usamos as informações que coletamos para:</p>
+                    <ul>
+                        <li>Fornecer, manter e melhorar o OdysChat.</li>
+                        <li>Desenvolver novos recursos e funcionalidades.</li>
+                        <li>Entender como os usuários usam o serviço para melhorá-lo.</li>
+                        <li>Detectar, investigar e prevenir atividades fraudulentas e não autorizadas.</li>
+                        <li>Proteger os direitos e a segurança de nossos usuários e terceiros.</li>
+                        <li>Cumprir obrigações legais.</li>
+                    </ul>
+                    <h4>3. Compartilhamento de Informações</h4>
+                    <p>Não vendemos, alugamos ou compartilhamos suas informações pessoais com terceiros, exceto nas seguintes circunstâncias:</p>
+                    <ul>
+                        <li><strong>Com seu Consentimento:</strong> Podemos compartilhar suas informações quando você nos der consentimento para fazê-lo.</li>
+                        <li><strong>Para Fins Legais:</strong> Podemos compartilhar informações se acreditarmos de boa fé que o acesso, uso, preservação ou divulgação das informações é razoavelmente necessário para cumprir qualquer lei, regulamento, processo legal ou solicitação governamental aplicável.</li>
+                        <li><strong>Para Proteger o OdysChat e Outros:</strong> Podemos compartilhar informações quando acreditarmos de boa fé que é necessário proteger os direitos, propriedade ou segurança do OdysChat, nossos usuários ou o público.</li>
+                    </ul>
+                    <h4>4. Segurança</h4>
+                    <p>Levamos a segurança de suas informações a sério e implementamos medidas técnicas e organizacionais apropriadas para proteger as informações contra acesso não autorizado, alteração, divulgação ou destruição.</p>
+                    <h4>5. Seus Direitos</h4>
+                    <p>Dependendo de onde você reside, você pode ter certos direitos em relação às suas informações pessoais, incluindo:</p>
+                    <ul>
+                        <li>O direito de acessar as informações que temos sobre você.</li>
+                        <li>O direito de corrigir informações imprecisas que temos sobre você.</li>
+                        <li>O direito de excluir suas informações.</li>
+                        <li>O direito de restringir ou se opor ao processamento de suas informações.</li>
+                        <li>O direito à portabilidade de dados.</li>
+                    </ul>
+                    <h4>6. Crianças</h4>
+                    <p>O OdysChat não é destinado a pessoas com menos de 18 anos de idade. Não coletamos intencionalmente informações pessoais de crianças menores de 18 anos. Se tomarmos conhecimento de que coletamos informações pessoais de uma criança menor de 18 anos, tomaremos medidas para excluir essas informações o mais rápido possível.</p>
+                    <h4>7. Alterações nesta Política</h4>
+                    <p>Podemos atualizar esta Política de Privacidade de tempos em tempos. Notificaremos você sobre quaisquer alterações publicando a nova Política de Privacidade nesta página e atualizando a data "Última atualização" abaixo.</p>
+                    <h4>8. Contato</h4>
+                    <p>Se você tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco em: contato@odyschat.com</p>
+                    <p><strong>Última atualização:</strong> 1 de novembro de 2023</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Preview Modal -->
+    <div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Captura de Tela</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="captured-image" class="img-fluid rounded" alt="Captura de tela">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <a id="download-image" href="#" class="btn btn-primary" download="odyschat-capture.png">Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Socket.IO -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Emoji Picker -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+    <!-- Custom JS -->
+    <script src="client.js"></script>
+    <script>
+        // Função para garantir que os modals tenham o tema correto
+        function updateModalTheme() {
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            document.querySelectorAll('.modal-content').forEach(modal => {
+                if (isDarkMode) {
+                    modal.style.backgroundColor = '#1e1e1e';
+                    modal.style.color = '#f8f9fa';
+                } else {
+                    modal.style.backgroundColor = '';
+                    modal.style.color = '';
+                }
+            });
+            document.querySelectorAll('.modal-header, .modal-footer').forEach(el => {
+                if (isDarkMode) {
+                    el.style.borderColor = '#2d2d2d';
+                } else {
+                    el.style.borderColor = '';
+                }
+            });
+        }
+
+        // Adicionar evento para atualizar o tema dos modais quando abertos
+        document.querySelectorAll('[data-bs-toggle="modal"]').forEach(button => {
+            button.addEventListener('click', () => {
+                setTimeout(updateModalTheme, 100);
+            });
+        });
+
+        // Verificar tema ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add('dark-mode');
+                setTimeout(updateModalTheme, 100);
+            }
+
+            // Configurar Socket.IO para mensagens
+            const socket = io();
+            socket.on('new message', function(message) {
+                addMessage(message);
+            });
+
+            // Configurar envio de mensagens
+            const sendButton = document.getElementById('send-btn');
+            const messageInput = document.getElementById('message-input');
+            sendButton.addEventListener('click', function() {
+                const message = messageInput.value.trim();
+                if (message) {
+                    socket.emit('send message', message);
+                    addMessage('Você: ' + message);
+                    messageInput.value = '';
+                }
+            });
+
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendButton.click();
+                }
+            });
+        });
+
+        // Função para adicionar mensagens com rolagem condicional
+        function addMessage(message) {
+            const chatBox = document.getElementById('chat-box');
+            const wasAtBottom = chatBox.scrollHeight - chatBox.clientHeight <= chatBox.scrollTop + 1;
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            messageElement.classList.add('mb-2'); // Adiciona margem para melhor visualização
+            chatBox.appendChild(messageElement);
+            if (wasAtBottom) {
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
